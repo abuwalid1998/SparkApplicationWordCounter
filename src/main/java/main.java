@@ -1,36 +1,38 @@
 
+import Config.SparkConfig;
 import org.apache.spark.*;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.*;
+
+import javax.swing.*;
 import java.util.*;
 
-class  ScalafirstPorject
-{
-    public static void wordcount(String filename) {
-        try {
-            SparkConf sparkConf = new SparkConf().setMaster("local").setAppName("Words Counter").set("spark.shuffle.service.enabled", "false")
-                    .set("spark.dynamicAllocation.enabled", "false");
-            JavaSparkContext javaSparkContext = new JavaSparkContext(sparkConf);
-            JavaRDD<String> inFile = javaSparkContext.textFile(filename);
-            JavaRDD<String> wordsfile = inFile.flatMap(content->Arrays.asList(content.split(" ")).iterator());
-            JavaPairRDD countdata = wordsfile.mapToPair(t-> new Tuple2<>(t,1)).reduceByKey((x,y) ->(int) x + (int) y );
+class  ScalafirstPorject {
 
-            System.out.println("Jafar");
-            countdata.saveAsTextFile("C:\\Users\\PC\\OneDrive\\Desktop\\RESULT");
 
-        }catch (Exception e){
-            System.out.println("Hamza");
-            System.out.println(e.getMessage());
-        }
-    }
     public static void main(String args[])  //static method
     {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter File Path :- ");
-       String path = sc.nextLine();
-       System.out.println(path);
-       wordcount(path);
+        SparkConfig sparkConfig = new SparkConfig();
+
+        JFileChooser chooser= new JFileChooser();
+
+        //inputfile
+        int choice = chooser.showOpenDialog(null);
+        if (choice != JFileChooser.APPROVE_OPTION) return;
+        String inputfile = chooser.getSelectedFile().getPath();
+
+
+        //outputfolder
+         choice = chooser.showSaveDialog(null);
+         if (choice != JFileChooser.APPROVE_OPTION) return;
+         String outputfile = chooser.getSelectedFile().getPath();
+
+
+         System.out.println(inputfile);
+         System.out.println(outputfile);
+
+         sparkConfig.wordcount(inputfile,outputfile);
     }
 }
