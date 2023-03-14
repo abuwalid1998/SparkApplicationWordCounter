@@ -36,15 +36,15 @@ class  ScalafirstPorject {
 //
 //         sparkConfig.wordCount(inputfile,outputfile);
 
+
+        //Start Pi Calculator
        String slices =  JOptionPane.showInputDialog("Enter Number of slices less than 1000");
-
        int num = Integer.parseInt(slices);
-
        if (num > 1000){
            num = 999;
        }
-
        sparkConfig.CalculatePi(num);
-
     }
+
+
 }

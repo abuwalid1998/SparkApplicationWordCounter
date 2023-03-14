@@ -1,0 +1,12 @@
+Spark Start Server : 
+
+1) cd C:\spark-3.3.2-bin-hadoop3
+
+2)spark-class org.apache.spark.deploy.master.Master
+
+3)spark-class org.apache.spark.deploy.worker.Worker spark://10.10.10.226:7077
+
+4)spark-shell --master <spark://192.168.1.109:7077>
+
+
+5) http://amjad-khaliliah:4040/jobs/ (web ui)
