@@ -33,6 +33,6 @@ class  ScalafirstPorject {
          System.out.println(inputfile);
          System.out.println(outputfile);
 
-         sparkConfig.wordcount(inputfile,outputfile);
+         sparkConfig.wordCount(inputfile,outputfile);
     }
 }
